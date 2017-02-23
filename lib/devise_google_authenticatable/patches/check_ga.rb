@@ -19,8 +19,9 @@ module DeviseGoogleAuthenticator::Patches
 
         if resource.respond_to?(:get_qr) and resource.gauth_enabled? and resource.require_token?(cookies.signed[:gauth]) #Therefore we can quiz for a QR
           tmpid = resource.assign_tmp #assign a temporary key and fetch it
+          after_checkga_path = after_sign_in_path_for(resource)
           warden.logout #log the user out
-
+          session[:after_checkga_path] = after_checkga_path
           #we head back into the checkga controller with the temporary id
           #Because the model used for google auth may not always be the same, and may be a sub-model, the eval will evaluate the appropriate path name
           #This change addresses https://github.com/AsteriskLabs/devise_google_authenticator/issues/7
