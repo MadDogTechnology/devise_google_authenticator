@@ -33,7 +33,7 @@ class Devise::CheckgaController < Devise::SessionsController
           }
         end
       else
-        redirect_to :root, flash: { alert: "MFA code failed." }
+        redirect_to :new_user_session, flash: { alert: "MFA code failed." }
       end
 
     else
