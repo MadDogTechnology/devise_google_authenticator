@@ -33,8 +33,7 @@ class Devise::CheckgaController < Devise::SessionsController
           }
         end
       else
-        set_flash_message(:error, :error)
-        redirect_to :root
+        redirect_to :root, flash: { alert: "MFA code failed." }
       end
 
     else
